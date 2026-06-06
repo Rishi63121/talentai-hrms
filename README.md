@@ -8,8 +8,11 @@ pip install -r backend/requirements.txt
 
 # 2. Copy and configure environment
 cp .env.example .env
-# Edit .env and add your GEMINI_API_KEY
-
+# Edit .env and add your GROQ_API_KEY
+GROQ_API_KEY=your_groq_api_key
+ SECRET_KEY=your_secret_key 
+ ALGORITHM=HS256 
+ ACCESS_TOKEN_EXPIRE_MINUTES=30
 # 3. Seed the database (creates admin user)
 python seed.py
 
