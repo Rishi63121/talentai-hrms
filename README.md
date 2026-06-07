@@ -1,73 +1,239 @@
-# TalentAI HRMS — Backend
+TalentAI HRMS
 
-## Quick Start
+Overview
 
-```bash
-# 1. Install dependencies
-pip install -r backend/requirements.txt
+TalentAI HRMS is a full-stack Human Resource Management System that streamlines recruitment and employee management processes through role-based access control and AI-powered features.
 
-# 2. Copy and configure environment
-cp .env.example .env
-# Edit .env and add your GROQ_API_KEY
-GROQ_API_KEY=your_groq_api_key
- SECRET_KEY=your_secret_key 
- ALGORITHM=HS256 
- ACCESS_TOKEN_EXPIRE_MINUTES=30
-# 3. Seed the database (creates admin user)
-python seed.py
+The system provides dedicated dashboards for Admins, Recruiters, and Employees, ensuring secure access to relevant data and functionalities.
 
-# 4. Start the API server
-uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
-```
+⸻
 
-API docs available at: http://localhost:8000/docs
+Features
 
-## Default Credentials
-- Email: `admin@talentai.com`
-- Password: `admin123`
+Authentication & Security
 
-## Folder Structure
-```
-talentai-hrms/
+* JWT-based Authentication
+* Role-Based Access Control (RBAC)
+* Secure Password Hashing
+* Protected API Endpoints
+
+Admin Module
+
+* Employee Management
+* Attendance Management
+* Payroll Management
+* Performance Review Management
+* Analytics Dashboard
+* Organization-wide Monitoring
+
+Recruiter Module
+
+* Job Management
+* Candidate Management
+* Resume Screening
+* AI-Powered Interview Question Generation
+* Recruitment Workflow Tracking
+
+Employee Module
+
+* Personal Dashboard
+* Profile Management
+* View Attendance Records
+* View Payroll Information
+* View Performance Reviews
+* Employee-Specific Data Access
+
+⸻
+
+User Roles
+
+Admin
+
+* Manage employees
+* Manage attendance records
+* Generate payroll
+* Manage performance reviews
+* View analytics and reports
+
+Recruiter
+
+* Create and manage job postings
+* Manage candidates
+* Screen resumes
+* Generate AI interview questions
+* Track recruitment process
+
+Employee
+
+* View personal attendance
+* View payroll details
+* View performance reviews
+* Access profile information
+
+⸻
+
+Technology Stack
+
+Frontend
+
+* React.js
+* Tailwind CSS
+* Axios
+* React Router
+* Recharts
+
+Backend
+
+* FastAPI
+* SQLAlchemy
+* Pydantic
+* JWT Authentication
+
+Database
+
+* SQLite
+
+AI Features
+
+* Resume Screening
+* Interview Question Generation
+
+⸻
+
+Project Structure
+
+TalentAI-HRMS/
+│
 ├── backend/
-│   ├── main.py               # FastAPI app + router registration
 │   ├── routers/
-│   │   ├── auth.py           # POST /auth/login, /auth/register
-│   │   ├── jobs.py           # CRUD /jobs
-│   │   ├── resumes.py        # POST /resumes/upload
-│   │   ├── candidates.py     # /candidates/screen, /rankings, /{id}
-│   │   ├── interview.py      # POST /interview/questions
-│   │   ├── onboarding.py     # POST /onboarding/create
-│   │   └── dashboard.py      # GET /dashboard
 │   ├── models/
-│   │   └── models.py         # SQLAlchemy ORM models
 │   ├── schemas/
-│   │   └── schemas.py        # Pydantic DTOs
-│   └── services/
-│       ├── auth_service.py   # JWT + password hashing
-│       ├── resume_service.py # PDF parsing (pdfplumber + PyPDF2)
-│       ├── ai_service.py # ai scoring + interview Q gen
-│       └── ranking_service.py# Rank recomputation engine
-├── database/
-│   └── db.py                 # SQLAlchemy engine + session
-├── uploads/                  # Uploaded resume PDFs
-├── seed.py                   # DB seed script
-└── .env.example
-```
+│   ├── services/
+│   ├── database/
+│   └── main.py
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── layouts/
+│   │   ├── context/
+│   │   └── api/
+│   │
+│   └── public/
+│
+└── README.md
 
-## API Reference
+⸻
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | /auth/login | Login → JWT token |
-| POST | /auth/register | Register new user |
-| POST | /jobs | Create job posting |
-| GET | /jobs | List all jobs |
-| POST | /resumes/upload | Upload & parse resume PDF |
-| POST | /candidates/screen | AI-score candidate vs job |
-| GET | /candidates/rankings | Ranked candidates (filter by job_id) |
-| GET | /candidates/{id} | Candidate detail + top score |
-| GET | /candidates | List all candidates |
-| POST | /interview/questions | Generate AI interview questions |
-| POST | /onboarding/create | Create onboarding record |
-| GET | /dashboard | Aggregate stats |
+Setup Instructions
+
+Backend Setup
+
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+
+Backend runs on:
+
+http://localhost:8000
+
+Swagger Documentation:
+
+http://localhost:8000/docs
+
+⸻
+
+Frontend Setup
+
+cd frontend
+npm install
+npm run dev
+
+Frontend runs on:
+
+http://localhost:5173
+
+⸻
+
+API Modules
+
+Authentication
+
+* Login
+* Registration
+* JWT Token Management
+
+Recruitment
+
+* Jobs
+* Candidates
+* Resumes
+* Interview Generation
+
+HRMS
+
+* Employees
+* Attendance
+* Payroll
+* Performance Reviews
+
+Analytics
+
+* Organization Metrics
+* Attendance Insights
+* Employee Statistics
+
+⸻
+
+Security Features
+
+* JWT Token Authentication
+* Protected Routes
+* Employee Data Isolation
+* Role-Based Access Control
+* Secure Password Storage
+
+⸻
+
+Employee Data Isolation
+
+Employees can only access their own:
+
+* Attendance Records
+* Payroll Information
+* Performance Reviews
+* Profile Details
+
+Administrative users retain access to organization-wide data.
+
+⸻
+
+Demo Accounts
+
+Admin
+
+* Role: Admin
+
+Recruiter
+
+* Role: Recruiter
+
+Employee
+
+* Role: Employee
+
+Passwords have been omitted from the repository for security reasons.
+
+⸻
+
+Future Enhancements
+
+* Email Notifications
+* Leave Management
+* Employee Self-Service Requests
+* AI Candidate Ranking Improvements
+* Advanced Analytics Dashboard
+* Cloud Deployment
+
+⸻
