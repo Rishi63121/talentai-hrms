@@ -13,7 +13,13 @@ def login(payload: LoginRequest, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.email == payload.email).first()
     if not user or not verify_password(payload.password, user.password_hash):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
-    token = create_access_token({"sub": user.email, "role": user.role, "user_id": user.id})
+    token = create_access_token({
+    "sub": user.email,
+    "email": user.email,
+    "name": user.name,
+    "role": user.role,
+    "user_id": user.id
+})
     return LoginResponse(token=token, role=user.role)
 
 

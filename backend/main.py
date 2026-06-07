@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from backend.routers import recruiters
 from backend.routers import (
     auth,
     jobs,
@@ -123,3 +123,9 @@ def root():
     return {
         "message": "TalentAI HRMS API is running"
     }
+
+app.include_router(
+    recruiters.router,
+    prefix="/recruiters",
+    tags=["Recruiters"]
+)
